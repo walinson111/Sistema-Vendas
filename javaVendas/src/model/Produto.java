@@ -12,47 +12,48 @@ public class Produto {
     private double precoProduto;
     private int qtdeProduto;
 
-    public int getIdProduto() {
-        return (idProduto);
+    public void setIdProduto(int idProduto){
+        this.idProduto = idProduto;
     }
 
-    public void setIdProduto(int idP) {
-        idProduto = idP;
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+
+    public void setDescricaoProduto(String descricaoProduto) {
+        this.descricaoProduto = descricaoProduto;
+    }
+
+    public void setPrecoProduto(double precoProduto) {
+        this.precoProduto = precoProduto;
+    }
+
+    public void setQtdeProduto(int qtdeProduto) {
+        this.qtdeProduto = qtdeProduto;
+    }
+    
+    public int getIdProduto() {
+        return (idProduto);
     }
 
     public String getNomeProduto() {
         return (nomeProduto);
     }
 
-    public void setNomeProduto(String nP) {
-        nomeProduto = nP;
-    }
 
     public String getDescricaoProduto() {
         return (descricaoProduto);
     }
 
-    public void setDescricaoProduto(String dscP) {
-        descricaoProduto = dscP;
-    }
 
     public double getPrecoProduto() {
         return (precoProduto);
     }
 
-    public void setPrecoProduto(double prcP) {
-        precoProduto = prcP;
-    }
 
     public int getQtdeProduto() {
         return (qtdeProduto);
     }
-
-    public void setQtdeProduto(int qtdeP) {
-        qtdeProduto = qtdeP;
-    }
-
-    
-    
+   
     
 }

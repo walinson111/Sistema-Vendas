@@ -186,12 +186,16 @@ public class MenuCliente extends javax.swing.JFrame {
     private void btn_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalvarActionPerformed
         Conexao c = new Conexao();
         c.getConexao();
+       
+        
         
         Cliente cli = new Cliente();
         cli.setNomeCliente(txt_Nome.getText());
         cli.setEnderecoCliente(txt_Endereco.getText());
         cli.setEmailCliente(txt_Email.getText());
         cli.setTelefoneCliente(txt_Telefone.getText());
+        
+        
         
         ClienteDAO cDAO = new ClienteDAO();
         cDAO.inserir(cli);

@@ -35,8 +35,6 @@ public class MenuProduto extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txt_IDProduto = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txt_NomeProduto = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -55,9 +53,13 @@ public class MenuProduto extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Cadastro de Produtos");
 
-        jLabel2.setText("Código:");
-
         jLabel3.setText("Nome:");
+
+        txt_NomeProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_NomeProdutoActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Descrição:");
 
@@ -127,10 +129,6 @@ public class MenuProduto extends javax.swing.JFrame {
                         .addComponent(txt_QuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_IDProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_Salvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_Limpar)
@@ -149,11 +147,7 @@ public class MenuProduto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txt_IDProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txt_NomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -169,7 +163,7 @@ public class MenuProduto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txt_QuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Salvar)
                     .addComponent(btn_Limpar)
@@ -181,7 +175,6 @@ public class MenuProduto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void limparFormulario(){
-        txt_IDProduto.setText("");
         txt_NomeProduto.setText("");
         txt_DescricaoProduto.setText("");
         txt_PrecoProduto.setText("");
@@ -220,7 +213,6 @@ public class MenuProduto extends javax.swing.JFrame {
         c.getConexao();
         
         Produto p = new Produto();
-        p.setIdProduto(Integer.parseInt(txt_IDProduto.getText()));
         p.setNomeProduto(txt_NomeProduto.getText());
         p.setDescricaoProduto(txt_DescricaoProduto.getText());
         p.setPrecoProduto(Double.parseDouble(txt_PrecoProduto.getText()));
@@ -232,6 +224,10 @@ public class MenuProduto extends javax.swing.JFrame {
         
         limparFormulario();
     }//GEN-LAST:event_btn_SalvarActionPerformed
+
+    private void txt_NomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_NomeProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_NomeProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,13 +270,11 @@ public class MenuProduto extends javax.swing.JFrame {
     private javax.swing.JButton btn_Salvar;
     private javax.swing.JButton btn_Voltar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField txt_DescricaoProduto;
-    private javax.swing.JTextField txt_IDProduto;
     private javax.swing.JTextField txt_NomeProduto;
     private javax.swing.JTextField txt_PrecoProduto;
     private javax.swing.JTextField txt_QuantidadeProduto;

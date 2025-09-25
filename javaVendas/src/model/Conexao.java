@@ -11,7 +11,7 @@ public class Conexao {
     public Connection getConexao(){
         try{
             Connection conn = DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/bdvendas?useTimezone=true&serverTimezone=UTC",
+            "jdbc:mysql://localhost:3306/javavendas?useTimezone=true&serverTimezone=UTC",
             "root","");
             
             System.out.println("Conexão realizada com sucesso!");

@@ -37,8 +37,7 @@ public class Menu extends javax.swing.JFrame {
         btn_Clientes = new javax.swing.JButton();
         btn_Produtos = new javax.swing.JButton();
         btn_Notas = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        btnMenuTeste = new javax.swing.JButton();
+        btnRealizarVenda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,16 +77,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 204, 51));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton1.setText("Realizar Venda");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setFocusPainted(false);
-
-        btnMenuTeste.setText("jButton2");
-        btnMenuTeste.addActionListener(new java.awt.event.ActionListener() {
+        btnRealizarVenda.setBackground(new java.awt.Color(0, 204, 51));
+        btnRealizarVenda.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnRealizarVenda.setText("Realizar Venda");
+        btnRealizarVenda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRealizarVenda.setFocusPainted(false);
+        btnRealizarVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMenuTesteActionPerformed(evt);
+                btnRealizarVendaActionPerformed(evt);
             }
         });
 
@@ -97,18 +94,16 @@ public class Menu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel2)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btn_Clientes, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btn_Produtos)
-                            .addGap(4, 4, 4)
-                            .addComponent(btn_Notas, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jButton1))
-                    .addComponent(btnMenuTeste))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_Clientes, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Produtos)
+                        .addGap(4, 4, 4)
+                        .addComponent(btn_Notas, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRealizarVenda))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -118,15 +113,13 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(31, 31, 31)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMenuTeste)
-                .addGap(15, 15, 15)
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Clientes, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Produtos, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Notas, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(btnRealizarVenda)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -154,21 +147,20 @@ public class Menu extends javax.swing.JFrame {
     private void btn_NotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NotasActionPerformed
         btn_Notas.addActionListener(e -> {
         
-        new MenuNotas().setVisible(true);
+        new MenuListaNotas().setVisible(true);
 
         dispose(); 
         });
     }//GEN-LAST:event_btn_NotasActionPerformed
 
-    private void btnMenuTesteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuTesteActionPerformed
-            
-                MenuTeste mT = new MenuTeste();
-                jDP.add(mT);
-                mT.setVisible(true);
-                
-                
-            
-    }//GEN-LAST:event_btnMenuTesteActionPerformed
+    private void btnRealizarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarVendaActionPerformed
+        btn_Notas.addActionListener(e -> {
+        
+        new MenuNotas().setVisible(true);
+
+        dispose(); 
+        });
+    }//GEN-LAST:event_btnRealizarVendaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,11 +199,10 @@ public class Menu extends javax.swing.JFrame {
     
     private JDesktopPane jDP = new JDesktopPane();
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnMenuTeste;
+    private javax.swing.JButton btnRealizarVenda;
     private javax.swing.JButton btn_Clientes;
     private javax.swing.JButton btn_Notas;
     private javax.swing.JButton btn_Produtos;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

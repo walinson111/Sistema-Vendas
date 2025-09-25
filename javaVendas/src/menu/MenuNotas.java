@@ -1,6 +1,20 @@
 package menu;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import model.Cliente;
+import model.ItemVenda;
+import model.Produto;
+import model.Venda;
+import modelDAO.ClienteDAO;
+import modelDAO.ItemVendaDAO;
+import modelDAO.ProdutoDAO;
+import modelDAO.VendaDAO;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,6 +33,32 @@ public class MenuNotas extends javax.swing.JFrame {
      */
     public MenuNotas() {
         initComponents();
+        carregarClientes();
+        carregarProdutos();
+    }
+    
+    private void carregarClientes() {
+        DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
+        ClienteDAO clienteDAO = new ClienteDAO();
+        List<Cliente> clientes = clienteDAO.buscarTodos();
+        
+        for (Cliente cliente : clientes) {
+            modelo.addElement(cliente.getNomeCliente());
+        }
+        
+        cmb_Cliente.setModel(modelo);
+    }
+    
+    private void carregarProdutos() {
+        DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        List<Produto> produtos = produtoDAO.buscarTodos();
+        
+        for (Produto produto : produtos) {
+            modelo.addElement(produto.getNomeProduto());
+        }
+        
+        cmb_Produto.setModel(modelo);
     }
 
     /**
@@ -31,9 +71,7 @@ public class MenuNotas extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         cmb_Cliente = new javax.swing.JComboBox<>();
-        txt_IDNota = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -41,17 +79,15 @@ public class MenuNotas extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         cmb_Produto = new javax.swing.JComboBox<>();
         txt_Data = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
+        btn_salvar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        voltarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Lançamento de Nota");
-
-        jLabel2.setText("Código:");
 
         cmb_Cliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmb_Cliente.addActionListener(new java.awt.event.ActionListener() {
@@ -72,16 +108,26 @@ public class MenuNotas extends javax.swing.JFrame {
 
         txt_Data.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
-        jButton1.setText("Salvar");
+        btn_salvar.setText("Salvar");
+        btn_salvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_salvarActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Limpar");
 
         jButton3.setText("Listar");
-
-        jButton4.setText("Voltar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        voltarButton.setText("Voltar");
+        voltarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                voltarButtonActionPerformed(evt);
             }
         });
 
@@ -102,10 +148,6 @@ public class MenuNotas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmb_Produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(txt_IDNota, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
                         .addComponent(txt_Data, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -114,13 +156,13 @@ public class MenuNotas extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(cmb_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btn_salvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)))
+                        .addComponent(voltarButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -128,11 +170,7 @@ public class MenuNotas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txt_IDNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                .addGap(96, 96, 96)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cmb_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -150,25 +188,101 @@ public class MenuNotas extends javax.swing.JFrame {
                     .addComponent(txt_Data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btn_salvar)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(voltarButton))
                 .addGap(15, 15, 15))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void voltarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarButtonActionPerformed
+           new Menu().setVisible(true); 
+           dispose();                   
+    }//GEN-LAST:event_voltarButtonActionPerformed
 
     private void cmb_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_ClienteActionPerformed
         Cliente c = new Cliente();
         
         c.getNomeCliente();
     }//GEN-LAST:event_cmb_ClienteActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jButton3.addActionListener(e -> {
+        
+        new MenuListaNotas().setVisible(true);
+            
+        dispose();
+        });
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
+        String nomeClienteSelecionado = (String) cmb_Cliente.getSelectedItem();
+        String nomeProdutoSelecionado = (String) cmb_Produto.getSelectedItem();
+        String quantidadeTexto = txt_Quantidade.getText();
+        String dataTexto = txt_Data.getText();
+    
+    
+    
+    
+        try {
+
+            ClienteDAO clienteDAO = new ClienteDAO();
+            Cliente cliente = clienteDAO.buscarPorNome(nomeClienteSelecionado); 
+
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            Produto produto = produtoDAO.buscarPeloNome(nomeProdutoSelecionado);
+
+            int idCliente = cliente.getidCliente();
+            int idProduto = produto.getIdProduto();
+            int quantidade = Integer.parseInt(quantidadeTexto);
+            Date dataVenda = new SimpleDateFormat("dd/MM/yyyy").parse(dataTexto);
+
+            double precoUnitario = produto.getPrecoProduto();
+            double totalVenda = quantidade * precoUnitario;
+
+            Venda venda = new Venda();
+            venda.setIdCliente(idCliente);
+            venda.setDataVenda(dataVenda);
+            venda.setTotalVenda(totalVenda);
+
+            ItemVenda itemVenda = new ItemVenda();
+            itemVenda.setIdProduto(idProduto);
+            itemVenda.setQuantidadeVendida(quantidade);
+            itemVenda.setPrecoUnitario(precoUnitario);
+
+            List<ItemVenda> itens = new ArrayList<>();
+            itens.add(itemVenda);
+
+            VendaDAO vendaDAO = new VendaDAO();
+            int idVendaGerado = vendaDAO.salvar(venda);
+
+            if (idVendaGerado != -1) {
+                ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
+                itemVendaDAO.salvarItens(idVendaGerado, itens);
+
+                JOptionPane.showMessageDialog(this, "Nota fiscal salva com sucesso! ID: " + idVendaGerado, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+                txt_Quantidade.setText("");
+                txt_Data.setText("");
+                cmb_Cliente.setSelectedIndex(0);
+                cmb_Produto.setSelectedIndex(0);
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao salvar a nota fiscal.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Quantidade deve ser um número válido.", "Erro de Formato", JOptionPane.ERROR_MESSAGE);
+            } catch (ParseException e) {
+                JOptionPane.showMessageDialog(this, "Formato de data inválido. Use dd/MM/yyyy.", "Erro de Formato", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Ocorreu um erro ao salvar: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }       
+        
+    }//GEN-LAST:event_btn_salvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,20 +320,18 @@ public class MenuNotas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_salvar;
     private javax.swing.JComboBox<String> cmb_Cliente;
     private javax.swing.JComboBox<String> cmb_Produto;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JFormattedTextField txt_Data;
-    private javax.swing.JTextField txt_IDNota;
     private javax.swing.JTextField txt_Quantidade;
+    private javax.swing.JButton voltarButton;
     // End of variables declaration//GEN-END:variables
 }
